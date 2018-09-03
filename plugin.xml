@@ -63,6 +63,7 @@
         <config-file target="config.xml" parent="/*">
             <feature name="Notification">
                 <param name="ios-package" value="CDVNotification"/>
+                <param name="onload" value="true" />
             </feature>
         </config-file>
         <header-file src="src/ios/CDVNotification.h" />

@@ -35,6 +35,7 @@ import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
+import android.media.AudioManager;
 import android.net.Uri;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -132,6 +133,8 @@ public class Notification extends CordovaPlugin {
             public void run() {
                 Uri ringtone = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
                 Ringtone notification = RingtoneManager.getRingtone(cordova.getActivity().getBaseContext(), ringtone);
+
+                notification.setStreamType(AudioManager.STREAM_ALARM);
 
                 // If phone is not set to silent mode
                 if (notification != null) {

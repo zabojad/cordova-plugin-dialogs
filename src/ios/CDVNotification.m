@@ -27,6 +27,18 @@ static NSMutableArray *alertList = nil;
 
 @implementation CDVNotification
 
+// this method is executed when the app loads because of the onload param in plugin.xml
+- (void)pluginInitialize {
+    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+    NSError *setCategoryError = nil;
+    BOOL ok = [audioSession setCategory:AVAudioSessionCategoryPlayback error:&setCategoryError];
+
+    NSLog(@"BackgroundAudio plugin ok? %@", ok ? @"YES" : @"NO");
+    if (!ok) {
+        NSLog(@"BackgroundAudio plugin error: %@", setCategoryError.description);
+    }
+}
+
 /*
  * showDialogWithMessage - Common method to instantiate the alert view for alert, confirm, and prompt notifications.
  * Parameters:
