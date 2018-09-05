@@ -31,6 +31,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.media.Ringtone;
@@ -131,8 +132,17 @@ public class Notification extends CordovaPlugin {
     public void beep(final long count) {
         cordova.getThreadPool().execute(new Runnable() {
             public void run() {
-                Uri ringtone = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-                Ringtone notification = RingtoneManager.getRingtone(cordova.getActivity().getBaseContext(), ringtone);
+                // Uri ringtone = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                Context context = cordova.getActivity().getBaseContext();
+                String package_name = context.getPackageName();
+                
+                Resources resources = context.getResources();
+
+                int resId = resources.getIdentifier("beep", "raw", package_name);
+                
+                Uri ringtone = Uri.parse("android.resource://" + package_name + "/" + resId);
+
+                Ringtone notification = RingtoneManager.getRingtone(context, ringtone);
 
                 notification.setStreamType(AudioManager.STREAM_ALARM);
 

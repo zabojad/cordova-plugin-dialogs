@@ -43,6 +43,8 @@
 
         <source-file src="src/android/Notification.java" target-dir="src/org/apache/cordova/dialogs" />
 
+        <source-file src="src/android/beep.wav" target-dir="res/raw" />
+
         <!-- android specific notification apis -->
         <js-module src="www/android/notification.js" name="notification_android">
             <merges target="navigator.notification" />
